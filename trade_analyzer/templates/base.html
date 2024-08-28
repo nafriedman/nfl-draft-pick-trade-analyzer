@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Draft Trade Analyzer</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>NFL Draft Trade Analyzer</h1>
+    <form action="api/analyze-trade" method="post">
+        <div>
+            <label for="team1_picks">Team 1 Picks (comma-separated):</label>
+            <input type="text" id="team1_picks" name="team1_picks" placeholder="e.g., 1, 33, 65" required>
+        </div>
+        <div>
+            <label for="team2_picks">Team 2 Picks (comma-separated):</label>
+            <input type="text" id="team2_picks" name="team2_picks" placeholder="e.g., 10, 41, 73" required>
+        </div>
+        <input type="submit" value="Analyze Trade">
+    </form>
+    <div id="result" style="text-align: center;"></div>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+
+</html>
