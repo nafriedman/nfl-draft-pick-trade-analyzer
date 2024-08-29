@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const team1Picks = document.getElementById('team1_picks').value.split(',').map(pick => pick.trim());
         const team2Picks = document.getElementById('team2_picks').value.split(',').map(pick => pick.trim());
 
-        fetch('/api/analyze-trade', {
+        fetch('/analyze-trade', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

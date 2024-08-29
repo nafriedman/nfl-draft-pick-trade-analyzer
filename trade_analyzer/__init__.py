@@ -3,7 +3,7 @@ from flask import Flask, render_template
 
 # Application Factory
 def create_app(test_config=None):
-    # create app
+    # Create app
     # When instance_relative_config is set to True, it tells Flask to look for configuration files relative to the "instance folder" instead of the application's root folder
     app = Flask(__name__, instance_relative_config=True)
     # set default configuration
@@ -38,11 +38,11 @@ def create_app(test_config=None):
             output.append(line)
         return "<br>".join(output)
 
-    # initialize app
+    # initialize db for flask app
     from . import db
     db.init_app(app)
 
-    from .routes import bp
-    app.register_blueprint(bp, url_prefix='/api')
+    from . import routes
+    app.register_blueprint(routes.bp)
 
     return app

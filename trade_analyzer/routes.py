@@ -1,4 +1,4 @@
-from flask import Blueprint, request, current_app, render_template, jsonify
+from flask import Blueprint, request, current_app
 from trade_analyzer.analyze import analyze_trade
 
 bp = Blueprint('api', __name__)
