@@ -1,4 +1,4 @@
-from .db import get_db
+from ..db import get_db
 
 def analyze_trade(team1_picks, team2_picks):
     db = get_db()

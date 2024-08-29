@@ -24,7 +24,7 @@ def init_db():
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
-    from . import populate_jimmy_johnson_chart
+    from .scripts import populate_jimmy_johnson_chart
     populate_jimmy_johnson_chart.init_jimmy_johnson_chart(current_app)
 
 @click.command('init-db')

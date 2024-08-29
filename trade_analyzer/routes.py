@@ -1,5 +1,5 @@
 from flask import Blueprint, request, current_app
-from trade_analyzer.analyze import analyze_trade
+from trade_analyzer.core.analyze import analyze_trade
 
 bp = Blueprint('api', __name__)
 

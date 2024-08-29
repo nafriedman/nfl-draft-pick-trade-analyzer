@@ -1,6 +1,6 @@
 import csv
 from flask import current_app
-from ...db import get_db
+from ..db import get_db
 
 def populate_jimmy_johnson_chart():
     db = get_db()
