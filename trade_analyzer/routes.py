@@ -8,8 +8,12 @@ bp = Blueprint('api', __name__)
 def analyze_trade_route():
     current_app.logger.info("Analyze trade route hit!")
     data = request.json
-    team1_picks = data.get('team1_picks', [])
-    team2_picks = data.get('team2_picks', [])
+    current_app.logger.info(f"Received data: {data}")
+    team1_picks = data.get('team1_picks[]', [])
+    team2_picks = data.get('team2_picks[]', [])
+
+    current_app.logger.info(f"Team 1 picks: {team1_picks}")
+    current_app.logger.info(f"Team 2 picks: {team2_picks}")
 
     if not validate_picks(team1_picks) or not validate_picks(team2_picks):
         return jsonify({"error": "Invalid input. Please provide a list ofcomma-separated numbers between 1 and 260 for each input."}), 400

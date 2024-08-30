@@ -8,19 +8,28 @@
 </head>
 <body>
     <h1>NFL Draft Trade Analyzer</h1>
-    <form action="/analyze-trade" method="post">
-        <div>
-            <label for="team1_picks">Team 1 Picks (comma-separated):</label>
-            <input type="text" id="team1_picks" name="team1_picks" placeholder="e.g., 1, 33, 65" required>
+    <form id="tradeForm" action="/analyze-trade" method="post">
+        <div id="team1Picks">
+            <h2>Team 1 Picks</h2>
+            <div class="pick-input">
+                <input type="number" name="team1_picks[]" min="1" max="260" required>
+                <button type="button" class="remove-pick">Remove</button>
+            </div>
         </div>
-        <div>
-            <label for="team2_picks">Team 2 Picks (comma-separated):</label>
-            <input type="text" id="team2_picks" name="team2_picks" placeholder="e.g., 10, 41, 73" required>
+        <button type="button" id="addTeam1Pick">Add Team 1 Pick</button>
+
+        <div id="team2Picks">
+            <h2>Team 2 Picks</h2>
+            <div class="pick-input">
+                <input type="number" name="team2_picks[]" min="1" max="260" required>
+                <button type="button" class="remove-pick">Remove</button>
+            </div>
         </div>
+        <button type="button" id="addTeam2Pick">Add Team 2 Pick</button>
+
         <input type="submit" value="Analyze Trade">
     </form>
-    <div id="result" style="text-align: center;"></div>
+    <div id="result"></div>
     <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
-
 </html>
