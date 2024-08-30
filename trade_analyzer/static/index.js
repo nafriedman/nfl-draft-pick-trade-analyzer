@@ -2,11 +2,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
     const resultDiv = document.getElementById('result');
 
-    form.addEventListener('submit', function(e) {
+    const validateInput = (input) => {
+        // result is a list of picks
+        const picks = input.split(',').map(pick => pick.trim());
+        // check if every pick is a number between 1 and 260
+        return picks.every(pick => {
+            const num = parseInt(pick, 10);
+            return !isNaN(num) && num >= 1 && num <= 260;
+        });
+    };
+
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const team1Picks = document.getElementById('team1_picks').value.split(',').map(pick => pick.trim());
-        const team2Picks = document.getElementById('team2_picks').value.split(',').map(pick => pick.trim());
+        const team1PicksInput = document.getElementById('team1_picks').value;
+        const team2PicksInput = document.getElementById('team2_picks').value;
+
+        if (!validateInput(team1PicksInput) || !validateInput(team2PicksInput)) {
+            resultDiv.innerHTML = '<p class="error">Invalid input. Please enter comma-separated numbers between 1 and 260.</p>';
+            resultDiv.style.display = 'block';
+            return;
+        }
+
+        const team1Picks = team1PicksInput.split(',').map(pick => parseInt(pick.trim(), 10));
+        const team2Picks = team2PicksInput.split(',').map(pick => parseInt(pick.trim(), 10));
 
         fetch('/analyze-trade', {
             method: 'POST',

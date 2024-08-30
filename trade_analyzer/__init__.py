@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template
+import logging
 
 # Application Factory
 def create_app(test_config=None):
@@ -11,6 +12,9 @@ def create_app(test_config=None):
         SECRET_KEY='dev', # should be overidden with random value when deploying
         DATABASE=os.path.join(app.instance_path, 'trade_analyzer.sqlite'),
     )
+
+    # Configure logging
+    app.logger.setLevel(logging.INFO)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
