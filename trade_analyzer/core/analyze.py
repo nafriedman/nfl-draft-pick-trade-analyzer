@@ -16,7 +16,7 @@ def analyze_trade(team1_picks, team2_picks):
     team2_value = calculate_value(team2_picks)
 
     difference = abs(team1_value - team2_value)
-    winner = "Team 1" if team1_value > team2_value else "Team 2" if team2_value > team1_value else "Equal"
+    winner = "Team 2" if team1_value > team2_value else "Team 1" if team2_value > team1_value else "Fair Trade"
 
     return {
         "team1_value": team1_value,

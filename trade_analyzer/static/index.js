@@ -38,17 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(form);
-        // console.log(formData);
-
-        // Convert FormData to a plain Object
         const data = {};
         formData.forEach((value, key) => {
             if (!data[key]) {
                 data[key] = formData.getAll(key)
             }
         });
-
-        // console.log(data);
 
         fetch('/analyze-trade', {
             method: 'POST',
@@ -57,9 +52,24 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log('Response status:', response.status);
+            return response.json();
+        })
         .then(data => {
-            document.getElementById('result').innerHTML = data.result;
+            console.log('Received data:', data);
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = '';
+            if (resultElement) {
+                resultElement.style.display = 'block';
+                resultElement.insertAdjacentHTML('beforeend', `<p>Team 1 value: ${data.team1_value}</p>`);
+                resultElement.insertAdjacentHTML('beforeend', `<p>Team 2 value: ${data.team2_value}</p>`);
+                resultElement.insertAdjacentHTML('beforeend', `<p>Difference: ${data.difference}</p>`);
+                resultElement.insertAdjacentHTML('beforeend', `<p>Winner: ${data.winner}</p>`);
+
+            } else {
+                console.error('Result element not found');
+            }
         })
         .catch(error => {
             console.error('Error:', error);

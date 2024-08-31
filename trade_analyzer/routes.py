@@ -15,8 +15,10 @@ def analyze_trade_route():
     current_app.logger.info(f"Team 1 picks: {team1_picks}")
     current_app.logger.info(f"Team 2 picks: {team2_picks}")
 
-    if not validate_picks(team1_picks) or not validate_picks(team2_picks):
-        return jsonify({"error": "Invalid input. Please provide a list ofcomma-separated numbers between 1 and 260 for each input."}), 400
+    valid1, team1_picks = validate_picks(team1_picks)
+    valid2, team2_picks = validate_picks(team2_picks)
 
-    result = analyze_trade(team1_picks, team2_picks)
-    return jsonify(result)
+    if not valid1 or not valid2:
+        return jsonify({"error": "Invalid input. Please provide a list of comma-separated numbers between 1 and 260 for each input."}), 400
+
+    return jsonify(analyze_trade(team1_picks, team2_picks))
