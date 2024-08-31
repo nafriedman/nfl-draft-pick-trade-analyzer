@@ -3,7 +3,7 @@ const createPickInput = (teamName) => {
   div.className = 'pick-input';
   div.innerHTML = `
             <input type="number" name="${teamName}_picks[]" min="1" max="260" required>
-            <button type="button" class="remove-pick">Remove</button>
+            <button type="button" class="remove-pick">X</button>
         `;
   return div;
 }

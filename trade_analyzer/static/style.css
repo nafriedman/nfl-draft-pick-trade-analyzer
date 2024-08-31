@@ -3,26 +3,81 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
+    color: #333;
+}
+
+h2 {
+    color: #444;
 }
 
 form {
-    max-width: 600px;
-    margin: 0 auto;
+    margin-bottom: 20px;
 }
 
-label {
-    display: block;
-    margin-top: 10px;
+.team-picks {
+    margin-bottom: 20px;
 }
 
-input[type="text"] {
-    width: 100%;
+.pick-input {
+    display: flex;
+    align-items: center;
+}
+
+input[type="number"] {
+    width: 70px;
     padding: 5px;
-    margin-top: 5px;
+    margin-right: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.remove-pick {
+    padding: 5px 8px;
+    font-size: 12px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.remove-pick:hover {
+    background-color: #d32f2f;
+}
+
+.add-pick {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
 }
 
 input[type="submit"] {
@@ -30,12 +85,29 @@ input[type="submit"] {
     width: 100%;
     padding: 10px;
     margin-top: 20px;
-    background-color: #4CAF50;
+    background-color: #2196F3;
     color: white;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #1976D2;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e7f3fe;
+    border: 1px solid #b3d4fc;
+    border-radius: 4px;
+}
+
+.picks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
 }

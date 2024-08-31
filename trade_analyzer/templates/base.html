@@ -7,29 +7,35 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>NFL Draft Trade Analyzer</h1>
-    <form id="tradeForm" action="/analyze-trade" method="post">
-        <div id="team1Picks">
-            <h2>Team 1 Picks</h2>
-            <div class="pick-input">
-                <input type="number" name="team1_picks[]" min="1" max="260" required>
-                <button type="button" class="remove-pick">Remove</button>
+    <div class="container">
+        <h1>NFL Draft Trade Analyzer</h1>
+        <form id="tradeForm" action="/analyze-trade" method="post">
+            <div class="team-picks">
+                <h2>Team 1 Picks</h2>
+                <div id="team1Picks" class="picks-grid">
+                    <div class="pick-input">
+                        <input type="number" name="team1_picks[]" min="1" max="260" required>
+                        <button type="button" class="remove-pick">X</button>
+                    </div>
+                </div>
+                <button type="button" id="addTeam1Pick" class="add-pick">Add Team 1 Pick</button>
             </div>
-        </div>
-        <button type="button" id="addTeam1Pick">Add Team 1 Pick</button>
 
-        <div id="team2Picks">
-            <h2>Team 2 Picks</h2>
-            <div class="pick-input">
-                <input type="number" name="team2_picks[]" min="1" max="260" required>
-                <button type="button" class="remove-pick">Remove</button>
+            <div class="team-picks">
+                <h2>Team 2 Picks</h2>
+                <div id="team2Picks" class="picks-grid">
+                    <div class="pick-input">
+                        <input type="number" name="team2_picks[]" min="1" max="260" required>
+                        <button type="button" class="remove-pick">X</button>
+                    </div>
+                </div>
+                <button type="button" id="addTeam2Pick" class="add-pick">Add Team 2 Pick</button>
             </div>
-        </div>
-        <button type="button" id="addTeam2Pick">Add Team 2 Pick</button>
 
-        <input type="submit" value="Analyze Trade">
-    </form>
-    <div id="result"></div>
+            <input type="submit" value="Analyze Trade">
+        </form>
+        <div id="result" class="result"></div>
+    </div>
     <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 </html>
