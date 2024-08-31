@@ -145,10 +145,125 @@ h2 {
 }
 
 .result {
-    display: none;
     margin-top: 30px;
-    background-color: #fff;
+    background-color: #f8f9fa;
     border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    position: relative; /* Add this */
+    overflow: hidden; /* Add this */
+}
+
+.result h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.result-item {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.result-label {
+    font-weight: bold;
+    color: #34495e;
+    font-size: 18px;
+    flex: 0 0 120px;
+    margin-right: 10px;
+}
+
+.result-bar-container {
+    flex-grow: 1;
+    height: 30px;
+    background-color: #ecf0f1;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.result-bar {
+    height: 100%;
+    background-color: #3498db;
+    transition: width 0.5s ease-out;
+}
+
+.result-value {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.difference-item .result-value {
+    position: static;
+    transform: none;
+}
+
+.winner {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #27ae60;
+    background-color: #e8f8f5;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.difference-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.difference-label {
+    margin-bottom: 5px;
+}
+
+.difference-value {
+    font-size: 24px;
+    color: #e74c3c;
+}
+
+.winner-section {
+    margin-top: 20px;
+    text-align: center;
+    background-color: #e8f8f5;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.winner {
+    font-size: 28px;
+    font-weight: bold;
+    color: #27ae60;
+    margin-bottom: 10px;
+}
+
+.difference {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.difference.high {
+    color: #e74c3c;
+}
+
+.difference.low {
+    color: #f39c12;
 }

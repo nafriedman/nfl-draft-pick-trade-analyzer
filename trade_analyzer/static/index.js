@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = {};
         formData.forEach((value, key) => {
             if (!data[key]) {
-                data[key] = formData.getAll(key)
+                data[key] = formData.getAll(key);
             }
         });
 
@@ -57,22 +57,35 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(data)
         })
-        .then(response => {
-            console.log('Response status:', response.status);
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            console.log('Received data:', data);
             const resultElement = document.getElementById('result');
-            console.log('Result element:', resultElement);
             if (resultElement) {
-                resultElement.innerHTML = '';
-                resultElement.style.display = 'block';
-                resultElement.insertAdjacentHTML('beforeend', `<p>Team 1 value: ${data.team1_value}</p>`);
-                resultElement.insertAdjacentHTML('beforeend', `<p>Team 2 value: ${data.team2_value}</p>`);
-                resultElement.insertAdjacentHTML('beforeend', `<p>Difference: ${data.difference}</p>`);
-                resultElement.insertAdjacentHTML('beforeend', `<p>Winner: ${data.winner}</p>`);
+                const maxScale = 5000;
+                const team1Bar = document.getElementById('team1-bar');
+                const team2Bar = document.getElementById('team2-bar');
 
+                team1Bar.style.width = `${(data.team1_value / maxScale) * 100}%`;
+                team2Bar.style.width = `${(data.team2_value / maxScale) * 100}%`;
+
+                document.getElementById('team1-value').textContent = data.team1_value;
+                document.getElementById('team2-value').textContent = data.team2_value;
+
+                const winnerElement = document.getElementById('winner');
+                const differenceElement = document.getElementById('difference');
+
+                winnerElement.textContent = `Winner: ${data.winner}`;
+
+                const absoluteDifference = Math.abs(data.difference);
+                differenceElement.textContent = `Won by ${absoluteDifference} points`;
+
+                if (absoluteDifference > 500) {
+                    differenceElement.style.color = '#e74c3c'; // Red color for difference > 500
+                } else {
+                    differenceElement.style.color = '#f39c12'; // Yellow color for difference <= 500
+                }
+
+                resultElement.style.display = 'block';
             } else {
                 console.error('Result element not found');
             }

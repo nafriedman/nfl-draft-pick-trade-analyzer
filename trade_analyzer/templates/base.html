@@ -54,8 +54,26 @@
                     <button type="submit" class="analyze-button">Analyze Trade</button>
                 </div>
             </form>
-            <div id="result" class="result">
-                <!-- Display your results here -->
+            <div id="result" class="result" style="display: none;">
+                <h3>Trade Analysis Results</h3>
+                <div class="result-item">
+                    <span class="result-label">Team 1 value:</span>
+                    <div class="result-bar-container">
+                        <div class="result-bar" id="team1-bar"></div>
+                        <span class="result-value" id="team1-value"></span>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Team 2 value:</span>
+                    <div class="result-bar-container">
+                        <div class="result-bar" id="team2-bar"></div>
+                        <span class="result-value" id="team2-value"></span>
+                    </div>
+                </div>
+                <div class="winner-section">
+                    <div id="winner" class="winner"></div>
+                    <div id="difference" class="difference"></div>
+                </div>
             </div>
         </main>
     </div>
