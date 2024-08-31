@@ -11,7 +11,7 @@ def populate_jimmy_johnson_chart():
         for row in csv_reader:
             db.execute(
                 'INSERT INTO jimmy_johnson_chart (pick_number, value) VALUES (?, ?)',
-                (int(row['pick_number']), int(row['value']))
+                (int(row['pick_number']), float(row['value']))
             )
 
     # Commit the changes
