@@ -43,12 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(form);
-        const data = {};
-        formData.forEach((value, key) => {
-            if (!data[key]) {
-                data[key] = formData.getAll(key);
-            }
-        });
+        const data = {
+            team1_picks: formData.getAll('team1_picks[]'),
+            team2_picks: formData.getAll('team2_picks[]'),
+            value_chart: formData.get('value_chart')
+        };
 
         fetch('/analyze-trade', {
             method: 'POST',
