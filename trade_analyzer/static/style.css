@@ -312,3 +312,22 @@ html, body {
 .content-wrap {
     flex: 1 0 auto;
 }
+
+.chart-selection {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.chart-selection h2 {
+    margin-bottom: 10px;
+}
+
+.chart-selection select {
+    width: 80%;
+    max-width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+}

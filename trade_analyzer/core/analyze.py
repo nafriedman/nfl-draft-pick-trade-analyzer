@@ -1,12 +1,12 @@
 from ..db import get_db
 
-def analyze_trade(team1_picks, team2_picks):
+def analyze_trade(team1_picks, team2_picks, value_chart):
     db = get_db()
 
     def calculate_value(picks):
         total_value = 0
         for pick in picks:
-            cursor = db.execute('SELECT value FROM jimmy_johnson_chart WHERE pick_number = ?', (pick,))
+            cursor = db.execute(f'SELECT value FROM {value_chart}_chart WHERE pick_number = ?', (pick,))
             result = cursor.fetchone()
             if result:
                 total_value += result['value']
