@@ -6,7 +6,6 @@ def validate_picks(picks):
         return False, None
     try:
         int_picks = [int(pick) for pick in picks]
-        current_app.logger.info(f"Picks: {int_picks}")
         if all(1 <= pick <= 260 for pick in int_picks):
             return True, int_picks
         else:
