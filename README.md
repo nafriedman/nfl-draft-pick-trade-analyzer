@@ -41,7 +41,7 @@ Skip this section if you only want to use the API directly.
    flask --app trade_analyzer run
    ```
 
-6. Open your web browser and navigate to `http://localhost:5000`.
+6. Open your web browser and navigate to `http://127.0.0.1:5000`.
 
 7. Use the web interface to input draft picks for two teams and analyze potential trades.
 
