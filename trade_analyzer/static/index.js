@@ -28,6 +28,28 @@ const removePick = (event) => {
   }
 }
 
+const validateInputs = () => {
+    const inputs = document.querySelectorAll('input[type="number"]');
+    const analyzeButton = document.getElementById('analyzeButton');
+    const errorMessage = document.getElementById('errorMessage');
+    let hasError = false;
+
+    inputs.forEach(input => {
+        if (/e/i.test(input.value)) {
+            hasError = true;
+        }
+    });
+
+    if (hasError) {
+        analyzeButton.disabled = true;
+        errorMessage.textContent = "Scientific notation is not allowed. Please enter a regular number.";
+        errorMessage.style.display = 'block';
+    } else {
+        analyzeButton.disabled = false;
+        errorMessage.style.display = 'none';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('tradeForm');
     const team1Picks = document.getElementById('team1Picks');
@@ -39,6 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
     addTeam2Pick.addEventListener('click', (e) => addPickInput(e, team2Picks));
     team1Picks.addEventListener('click', removePick);
     team2Picks.addEventListener('click', removePick);
+
+    // Add input event listeners to validate inputs
+    team1Picks.addEventListener('input', validateInputs);
+    team2Picks.addEventListener('input', validateInputs);
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
