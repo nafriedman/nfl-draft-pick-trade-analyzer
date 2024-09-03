@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 team1Bar.style.width = `${(data.team1_value / maxScale) * 100}%`;
                 team2Bar.style.width = `${(data.team2_value / maxScale) * 100}%`;
 
-                document.getElementById('team1-value').textContent = data.team1_value.toFixed(2);
-                document.getElementById('team2-value').textContent = data.team2_value.toFixed(2);
+                document.getElementById('team1-value').textContent = data.team1_value;
+                document.getElementById('team2-value').textContent = data.team2_value;
 
                 const winnerElement = document.getElementById('winner');
                 const differenceElement = document.getElementById('difference');
