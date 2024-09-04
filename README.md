@@ -40,9 +40,9 @@ Skip this section if you only want to use the API directly.
    ```
    flask --app trade_analyzer run --port <number>
    ```
-   where <number> should be replaced by the port number you would like to use. You can also just leave out the ``` --port <number> ``` option in order to use the default port which is 5000.
+   where ```<number>``` should be replaced by the port number you would like to use. You can also just leave out the ``` --port <number> ``` option in order to use the default port which is 5000.
 
-6. Open your web browser and navigate to `http://127.0.0.1:<number>` where <number> is the port number specified above.
+6. Open your web browser and navigate to `http://127.0.0.1:<number>` where ```<number>``` is the port number specified above.
 
 7. Use the web interface to input draft picks for two teams and analyze potential trades.
 
