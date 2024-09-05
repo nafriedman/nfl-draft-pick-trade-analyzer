@@ -37,13 +37,19 @@ const validateInputs = () => {
     for (let i = 0; i < inputs.length; i++) {
         if (/e/i.test(inputs[i].value)) {
             hasError = true;
+            message = "Scientific notation is not allowed. Please enter a regular number.";
+            break;
+        }
+        else if (inputs[i].value.includes('.')) {
+            hasError = true;
+            message = "Picks must be whole numbers.";
             break;
         }
     }
 
     if (hasError) {
         analyzeButton.disabled = true;
-        errorMessage.textContent = "Scientific notation is not allowed. Please enter a regular number.";
+        errorMessage.textContent = message;
         errorMessage.style.display = 'block';
     } else {
         analyzeButton.disabled = false;
