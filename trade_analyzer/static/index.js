@@ -34,11 +34,12 @@ const validateInputs = () => {
     const errorMessage = document.getElementById('errorMessage');
     let hasError = false;
 
-    inputs.forEach(input => {
-        if (/e/i.test(input.value)) {
+    for (let i = 0; i < inputs.length; i++) {
+        if (/e/i.test(inputs[i].value)) {
             hasError = true;
+            break;
         }
-    });
+    }
 
     if (hasError) {
         analyzeButton.disabled = true;
@@ -62,7 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
     team1Picks.addEventListener('click', removePick);
     team2Picks.addEventListener('click', removePick);
 
-    // Add input event listeners to validate inputs
+    // Validate inputs and add input event listeners to validate inputs
+    validateInputs();
     team1Picks.addEventListener('input', validateInputs);
     team2Picks.addEventListener('input', validateInputs);
 
