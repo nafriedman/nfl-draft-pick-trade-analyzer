@@ -13,7 +13,7 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'trade_analyzer.sqlite'),
     )
 
-    app.logger.setLevel(logging.INFO) # Configure logging
+    app.logger.setLevel(logging.INFO) # Configure logging level
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
