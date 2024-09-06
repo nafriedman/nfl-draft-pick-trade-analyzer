@@ -21,6 +21,11 @@ def parse_request_data(request):
         team1_picks = data.get('team1_picks', [])
         team2_picks = data.get('team2_picks', [])
         value_chart = data.get('value_chart', 'jimmy_johnson')
+        if value_chart not in ['jimmy_johnson']:
+            return jsonify({
+                "error": "Bad Request",
+                "message": "Invalid value chart"
+            }), 400 # Error: Bad Request
     # Check if the data is valid JSON
     except json.JSONDecodeError as e:
         error_response = jsonify({
