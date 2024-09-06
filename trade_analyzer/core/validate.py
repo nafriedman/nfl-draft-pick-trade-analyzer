@@ -58,12 +58,11 @@ def validate_picks(picks):
                         "message": "Please provide a list of comma-separated numbers between 1 and 260 for each input."}), 400
     # Check if picks is a list of integers
     try:
-        if not all(isinstance(pick, int) for pick in picks):
-            raise ValueError
-        if all(1 <= pick <= 260 for pick in picks):
-            return picks
+        int_picks = [int(pick) for pick in picks]  # Convert all picks to integers
+        if all(1 <= pick <= 260 for pick in int_picks):
+            return int_picks
         else:
-            current_app.logger.info(f"Error: Pick(s) out of range in {picks}")
+            current_app.logger.info(f"Error: Pick(s) out of range in {int_picks}")
             return jsonify({"error": "Bad Request",
                         "message": "Please provide a list of comma-separated integer numbers between 1 and 260 for each input."}), 400
     except ValueError:
