@@ -2,13 +2,15 @@ from flask import current_app, jsonify
 import json
 
 def validate_content_type(request):
-     if request.content_type != 'application/json':
+    ''' Validate the content type of the request '''
+    if request.content_type != 'application/json':
         return jsonify({
             "error": "Unsupported Media Type",
             "message": "Content-Type must be application/json"
         }), 415 # Error: Unsupported media type
 
 def parse_request_data(request):
+    ''' Parse the request data from the user '''
     # Check if the request data is valid JSON
     try:
         data = json.loads(request.data)
@@ -43,22 +45,26 @@ def parse_request_data(request):
     return team1_picks, team2_picks, value_chart
 
 def validate_picks(picks):
+    ''' Validate the picks input from the user '''
+    # Check if picks is a list
     if not isinstance(picks, list):
         current_app.logger.info(f"Error: Not a list")
         return jsonify({"error": "Bad Request",
                         "message": "Please provide a list of comma-separated numbers between 1 and 260 for each input."}), 400
+    # Check if picks is a list of integers
     try:
-        int_picks = [int(pick) for pick in picks]
-        if all(1 <= pick <= 260 for pick in int_picks):
-            return int_picks
+        if not all(isinstance(pick, int) for pick in picks):
+            raise ValueError
+        if all(1 <= pick <= 260 for pick in picks):
+            return picks
         else:
-            current_app.logger.info(f"Error: Pick(s) out of range in {int_picks}")
+            current_app.logger.info(f"Error: Pick(s) out of range in {picks}")
             return jsonify({"error": "Bad Request",
-                        "message": "Please provide a list of comma-separated numbers between 1 and 260 for each input."}), 400
+                        "message": "Please provide a list of comma-separated integer numbers between 1 and 260 for each input."}), 400
     except ValueError:
         current_app.logger.info(f"Error: Non-integer pick value(s) in {picks}")
         return jsonify({"error": "Bad Request",
-                        "message": "Please provide a list of comma-separated numbers between 1 and 260 for each input."}), 400
+                        "message": "Please provide a list of comma-separated integer numbers between 1 and 260 for each input."}), 400
 
 def validate_data(request):
      ''' Main validation function that returns the picks and value chart if
