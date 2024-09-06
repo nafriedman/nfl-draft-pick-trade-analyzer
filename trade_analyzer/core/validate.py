@@ -8,21 +8,32 @@ def validate_content_type(request):
             "message": "Content-Type must be application/json"
         }), 415 # Error: Unsupported media type
 
-def check_if_data_is_valid_json(request):
+def parse_request_data(request):
     # Check if the request data is valid JSON
     try:
         data = json.loads(request.data)
         # Get the data from the request
         current_app.logger.info(f"Received data: {data}")
+        if 'team1_picks' not in data or 'team2_picks' not in data:
+            raise KeyError("Missing required keys: 'team1_picks' and/or 'team2_picks'")
         team1_picks = data.get('team1_picks', [])
         team2_picks = data.get('team2_picks', [])
         value_chart = data.get('value_chart', 'jimmy_johnson')
+    # Check if the data is valid JSON
     except json.JSONDecodeError as e:
         error_response = jsonify({
             "error": "Bad Request",
             "message": f"Failed to decode JSON object: {str(e)}"
         }), 400 # Error: Bad Request
         return error_response
+    # Catch missing keys
+    except KeyError as e:
+        error_response = jsonify({
+            "error": "Bad Request",
+            "message": "Missing required keys: 'team1_picks' and/or 'team2_picks'"
+        }), 400 # Error: Bad Request
+        return error_response
+    # Catch any other exceptions
     except Exception as e:
         error_response = jsonify({
             "error": "Bad Request",
@@ -58,11 +69,10 @@ def validate_data(request):
          return None, None, None, content_type_result
 
      # Check if data is valid JSON, and if so, retrieve data
-     json_result = check_if_data_is_valid_json(request)
+     json_result = parse_request_data(request)
      if isinstance(json_result, tuple) and isinstance(json_result[0], current_app.response_class):  # Error response
          return None, None, None, json_result
      team1_picks_raw, team2_picks_raw, value_chart = json_result
-     value_chart = value_chart or 'jimmy_johnson' # Default
 
      # Additional Validations
      team1_picks_result = validate_picks(team1_picks_raw)
