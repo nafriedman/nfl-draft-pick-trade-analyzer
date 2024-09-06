@@ -5,16 +5,15 @@ import logging
 # Application Factory
 def create_app(test_config=None):
     # Create app
-    # When instance_relative_config is set to True, it tells Flask to look for configuration files relative to the "instance folder" instead of the application's root folder
-    app = Flask(__name__, instance_relative_config=True)
-    # set default configuration
+    app = Flask(__name__, instance_relative_config=True)  # When instance_relative_config is set to True, it tells Flask to look for configuration files relative to the "instance folder" instead of the application's root folder
+
+    # Set default configuration
     app.config.from_mapping(
         SECRET_KEY='dev', # should be overidden with random value when deploying
         DATABASE=os.path.join(app.instance_path, 'trade_analyzer.sqlite'),
     )
 
-    # Configure logging
-    app.logger.setLevel(logging.INFO)
+    app.logger.setLevel(logging.INFO) # Configure logging level
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -23,12 +22,13 @@ def create_app(test_config=None):
         # load the test config if passed in
         app.config.from_mapping(test_config)
 
-    # ensure the instance folder exists
+    # Ensure the instance folder exists
     try:
         os.makedirs(app.instance_path)
     except OSError:
         pass
 
+    # Basic Routes
     @app.route('/', methods=('GET', 'POST'))
     def index():
         return render_template('base.html')
@@ -42,10 +42,11 @@ def create_app(test_config=None):
             output.append(line)
         return "<br>".join(output)
 
-    # initialize db for flask app
+    # Initialize db for flask app
     from . import db
     db.init_app(app)
 
+    # Register blueprints
     from . import routes
     app.register_blueprint(routes.bp)
 
